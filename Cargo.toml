@@ -1,0 +1,8 @@
+[package]
+name = "drum-beats"
+version = "0.1.0"
+authors = ["rap2hpoutre <raphaelht@gmail.com>"]
+
+[dependencies]
+corruption="*"
+glob="*"

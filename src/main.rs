@@ -8,6 +8,8 @@ use glob::glob;
 use hyper::server::Request;
 use corruption::Corruption;
 use corruption::response::Response;
+use rand::Rng;
+use std::path::PathBuf;
 
 fn main() {
     // Start Corruption
@@ -16,7 +18,7 @@ fn main() {
     // Declare routes
     corruption
         .get("/", |_| Response::html("index.html") )
-        .post("/wav", wav );
+        .get("/wav", wav );
 
     // Serve it to the world on 127.0.0.1:8080
     corruption.serve();
@@ -30,10 +32,15 @@ struct Wav {
 fn wav(_: &Request) -> corruption::response::Response {
 
     // Todo : optimize this (don't reload every time)
-    let files:Vec<Path> = glob("*").collect();
-
+    let files = list("*");
+    let file = rand::thread_rng().choose(&files).unwrap().to_str().unwrap().to_string();
+    println!("{:?}", file);
 
     Response::json(&Wav {
-        name: "hello".to_string()
+        name: file
     })
+}
+
+fn list(pattern: &str) -> Vec<PathBuf> {
+    glob(pattern).unwrap().map(|r| r.unwrap()).collect()
 }

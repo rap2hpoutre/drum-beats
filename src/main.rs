@@ -32,9 +32,8 @@ struct Wav {
 fn wav(_: &Request) -> corruption::response::Response {
 
     // Todo : optimize this (don't reload every time)
-    let files = list("*");
+    let files = list("static/wav/*");
     let file = rand::thread_rng().choose(&files).unwrap().to_str().unwrap().to_string();
-    println!("{:?}", file);
 
     Response::json(&Wav {
         name: file

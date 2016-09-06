@@ -1,2 +1,6 @@
 target
 .idea
+static/js
+static/css
+static/favicon
+resources/index.html

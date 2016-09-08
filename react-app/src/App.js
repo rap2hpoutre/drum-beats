@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import 'whatwg-fetch';
+import ReactAudioPlayer from 'react-audio-player';
 import './App.css';
 
 class App extends Component {
@@ -8,7 +9,8 @@ class App extends Component {
         super(props);
         console.log(window.location.href);
         this.state = {
-            wav: '#'
+            wav: '#',
+            name: '#',
         };
     };
 
@@ -18,10 +20,28 @@ class App extends Component {
                 <header>
                     <h1>Procedural Drum Loops for Lazy Composers</h1>
                 </header>
-                {this.state.name}
-                <div>
-                    <audio src={this.state.wav} preload="auto" controls
-                           loop></audio>
+
+                <br/>
+                <p>
+                    Listen and download a unique random 4 bar 120 bpm drum loops.
+                    Refresh for a new one.
+                    Some are OK, some are not OK.
+                    Use it for free.
+                    Enjoy.
+                    Drum loop are made in Ruby with Sonic PI.
+                    Web site was made with Rust for backend and React for frontend.
+                    Names are generate with PHP.
+                    Feel free to ask anything: raphaelht@gmail.com
+                </p>
+                <br/>
+                <div className="wav">
+                    <h2>{this.state.name}</h2>
+                    <br/>
+                    <ReactAudioPlayer
+                        src={this.state.wav}
+                    />
+                    <br/>
+                    <h2><a href={this.state.wav}>Download</a> (right click, save as)</h2>
                 </div>
             </div>
         );
@@ -33,8 +53,8 @@ class App extends Component {
 
         if (window.location.href === 'http://localhost:3000/') {
             that.setState({
-                name: "test.wav",
-                wav: "static/test.wav"
+                name: "full-sheep-432.wav",
+                wav: "http://www.jplayer.org/audio/m4a/Miaow-07-Bubble.m4a"
             });
         } else {
             fetch('/wav').then(function (response) {

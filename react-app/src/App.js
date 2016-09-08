@@ -23,14 +23,13 @@ class App extends Component {
 
                 <br/>
                 <p>
-                    Listen and download a unique random 4 bar 120 bpm drum loops.
+                    Listen and download unique random 4 bar 120 bpm drum loops.
                     Refresh for a new one.
                     Some are OK, some are not OK.
                     Use it for free.
-                    Enjoy.
                     Drum loop are made in Ruby with Sonic PI.
                     Web site was made with Rust for backend and React for frontend.
-                    Names are generate with PHP.
+                    Names are generated with PHP.
                     Feel free to ask me anything: raphaelht@gmail.com
                 </p>
                 <br/>

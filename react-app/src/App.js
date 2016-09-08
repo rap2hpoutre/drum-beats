@@ -31,7 +31,7 @@ class App extends Component {
                     Drum loop are made in Ruby with Sonic PI.
                     Web site was made with Rust for backend and React for frontend.
                     Names are generate with PHP.
-                    Feel free to ask anything: raphaelht@gmail.com
+                    Feel free to ask me anything: raphaelht@gmail.com
                 </p>
                 <br/>
                 <div className="wav">

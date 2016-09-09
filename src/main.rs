@@ -35,6 +35,13 @@ struct Wav {
 
 fn wav(_: &Request) -> corruption::response::Response {
 
+    // Update counter in redis
+    let client = redis::Client::open("redis://127.0.0.1/").unwrap();
+    let con = client.get_connection().unwrap();
+    let c: isize = con.get("counter").unwrap();
+    let _ : () = con.set("counter", c+1).unwrap();
+
+    // Return a wav
     // Todo : optimize this (don't reload every time)
     let files = list("static/wav/*");
     let file = rand::thread_rng().choose(&files).unwrap().to_str().unwrap().to_string();
@@ -53,12 +60,10 @@ struct Counter {
     value: isize,
 }
 
-// Counter
+// Counter (get page view number)
 fn counter(_: &Request) -> corruption::response::Response {
     let client = redis::Client::open("redis://127.0.0.1/").unwrap();
     let con = client.get_connection().unwrap();
-
-    let _ : () = con.set("counter", 1).unwrap();
     let c = con.get("counter").unwrap();
 
     Response::json(&Counter {

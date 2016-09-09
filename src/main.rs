@@ -3,6 +3,8 @@ extern crate hyper;
 extern crate rustc_serialize;
 extern crate glob;
 extern crate rand;
+extern crate redis;
+
 
 use glob::glob;
 use hyper::server::Request;
@@ -10,6 +12,7 @@ use corruption::Corruption;
 use corruption::response::Response;
 use rand::Rng;
 use std::path::PathBuf;
+use redis::Commands;
 
 fn main() {
     // Start Corruption
@@ -18,7 +21,8 @@ fn main() {
     // Declare routes
     corruption
         .get("/", |_| Response::html("index.html") )
-        .get("/wav", wav );
+        .get("/wav", wav )
+        .get("/counter", counter );
 
     // Serve it to the world on 127.0.0.1:8080
     corruption.serve();
@@ -42,4 +46,22 @@ fn wav(_: &Request) -> corruption::response::Response {
 
 fn list(pattern: &str) -> Vec<PathBuf> {
     glob(pattern).unwrap().map(|r| r.unwrap()).collect()
+}
+
+#[derive(RustcEncodable)]
+struct Counter {
+    value: isize,
+}
+
+// Counter
+fn counter(_: &Request) -> corruption::response::Response {
+    let client = redis::Client::open("redis://127.0.0.1/").unwrap();
+    let con = client.get_connection().unwrap();
+
+    let _ : () = con.set("counter", 1).unwrap();
+    let c = con.get("counter").unwrap();
+
+    Response::json(&Counter {
+        value: c
+    })
 }

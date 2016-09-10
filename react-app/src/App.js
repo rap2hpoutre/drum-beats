@@ -32,7 +32,6 @@ class App extends Component {
                     Names are generated using PHP.
                     Feel free to ask me anything: raphaelht@gmail.com
                 </p>
-                <br/>
                 <div className="wav">
                     <h2>{this.state.name}</h2>
                     <br/>

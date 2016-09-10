@@ -28,8 +28,8 @@ class App extends Component {
                     Some are OK, some are not OK.
                     Use it for free.
                     Drum loops are made in Ruby with Sonic PI.
-                    Website was built with Rust for backend and React for frontend.
-                    Names are generated with PHP.
+                    Website was built with Rust, Redis and React.
+                    Names are generated using PHP.
                     Feel free to ask me anything: raphaelht@gmail.com
                 </p>
                 <br/>
@@ -40,7 +40,9 @@ class App extends Component {
                         src={this.state.wav}
                     />
                     <br/>
-                    <h2><a href={this.state.wav}>Download</a> (right click, save as)</h2>
+                    <h2><a href={this.state.wav}>Download</a> <small>(right click, save as)</small></h2>
+                    <br/>
+                    <h2><a href="/">Get another one</a></h2>
                 </div>
             </div>
         );

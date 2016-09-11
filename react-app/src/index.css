@@ -8,8 +8,12 @@ body {
   max-width: 650px;
   line-height: 1.6;
   font-size: 14px;
-  color: #cfcfcf;
+  /*
+    color: #cfcfcf;
   background-color: rgb(0, 0, 128);
+  */
+    color: #003;
+    background-color: #fafafa;
   padding: 0 10px;
   text-align: center;
 }
